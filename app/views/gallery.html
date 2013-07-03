@@ -1,0 +1,82 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <form class="form-search navbar-search" ng-submit="search()">
+        <div class="input-append">
+          <input type="text" class="search-query span2" placeholder="Search for pictures..." ng-model="q">
+          <button class="btn btn-primary" ng-click="search()">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="result container" ng-hide="empty">
+  <div class="row">
+    <div class="span8 title">
+      <div ng-show="photos">{{noResults}} results found for <strong>{{query}}</strong></div>
+    </div>
+    <div class="span4">
+      <pagination
+        boundary-links="true"
+        num-pages="noOfPages"
+        current-page="currentPage"
+        max-size="7"
+        class="pagination-small pull-right"
+        previous-text="'&lsaquo;'"
+        next-text="'&rsaquo;'"
+        first-text="'&laquo;'"
+        last-text="'&raquo;'"
+        on-select-page="setPage(page)">
+      </pagination>
+    </div>
+  </div>
+  <ul class="thumbnails">
+    <li class="span4" ng-repeat="photo in photos.photo">
+      <a href="javascript:void(0)" class="thumbnail" ng-click="open(photo)">
+        <img ng-src="{{getUrl(photo)}}" alt="{{photo.title}}" sw-resize>
+      </a>
+    </li>
+  </ul>
+  <div class="row" ng-show="photos">
+    <div class="span12">
+      <pagination
+        boundary-links="true"
+        num-pages="noOfPages"
+        current-page="currentPage"
+        max-size="7"
+        class="pagination-small"
+        previous-text="'&lsaquo;'"
+        next-text="'&rsaquo;'"
+        first-text="'&laquo;'"
+        last-text="'&raquo;'"
+        on-select-page="setPage(page)">
+      </pagination>
+    </div>
+  </div>
+</div>
+
+<div modal="details">
+    <div class="modal-header">
+        <h3>{{photo.title}}</h3>
+    </div>
+    <div class="modal-body">
+      <img ng-src="{{getUrl(photo)}}" alt="{{photo.title}}">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+    </div>
+</div>
+
+<div class="message" ng-hide="photos">
+  <div class="content">
+    <p>Loading</p>
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 100%;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="message" ng-show="empty">
+  <div class="content"><p>No result found for {{query}}</p></div>
+</div>

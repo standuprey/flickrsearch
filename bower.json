@@ -1,0 +1,12 @@
+{
+  "name": "bootstrap-example",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~2.3.0",
+    "font-awesome": "~3.0.2",
+    "modernizr": "~2.6.2",
+    "angular": "~1.0.5"
+  },
+  "devDependencies": {}
+}
+
